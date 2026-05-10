@@ -5,11 +5,13 @@ A repository for my project in cell and molecular biology, "Integrative and Inte
 Every analysis pipeline was implemented in R version 4.5.0 (2025-04-11), and the source code is available at https://github.com/gta_duarte/LBCM_Project under a GNU General Public License V3.
 
 ## Repository Structure
+```text
 ├── R/           # Analysis scripts, functions, and pipelines
 ├── data/        # Raw and processed datasets
 ├── output/      # Figures, tables, and computational results
 ├── LICENSE      # GPLv3 license
 └── README.md    # This file
+```
 
 ## Requirements
 - R ≥ 4.5.0
