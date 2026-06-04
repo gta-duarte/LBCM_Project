@@ -264,5 +264,3 @@ write_csv(
   loadings_tbl,
   file.path(OUT_DIR, "gexp_PCA_loadings_top10.csv")
 )
-
-message("OK: wrote PCA scores, variance explained, loadings, scree plot, scatter plots, and report.")

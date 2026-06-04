@@ -386,4 +386,3 @@ report_lines <- c(
 
 writeLines(report_lines, OUT_REPORT)
 
-message("DONE: fully aligned + ANCOVA-consistent.")

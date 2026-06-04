@@ -813,6 +813,3 @@ write_csv(contrast_results, OUT_CONTR)
 write_csv(cluster_stats %>% filter(geneX %in% cluster_list), OUT_SELECTED)
 write_csv(cluster_map, OUT_MAP)
 write_csv(top_clusters, OUT_TOP50)
-
-message("OK: wrote multi-level ANCOVA global + all contrasts vs Neutral.")
-message("OK: multi-level branch is the main ranking / top-hits branch.")
