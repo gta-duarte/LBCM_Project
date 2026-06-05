@@ -34,10 +34,6 @@ SCALE_DATA  <- FALSE
 expr_raw <- read_csv(EXPR_FILE, show_col_types = FALSE)
 model    <- read_csv(MODEL_FILE, show_col_types = FALSE)
 
-if (ncol(expr_raw) < 3) {
-  stop("A matriz de expressão parece ter poucas colunas. Esperava genes nas linhas e SIDM nas colunas.")
-}
-
 # =========================================================
 # 2) Separar gene IDs e matriz de expressão
 # =========================================================
@@ -47,10 +43,6 @@ expr_mat_df <- expr_raw[, -GENE_ID_COL, drop = FALSE]
 
 sidm_cols <- names(expr_mat_df)
 sidm_cols <- sidm_cols[str_detect(sidm_cols, "^SIDM")]
-
-if (length(sidm_cols) == 0) {
-  stop("Não encontrei colunas SIDM na matriz de expressão.")
-}
 
 expr_mat_df <- expr_mat_df %>%
   select(all_of(sidm_cols))
@@ -68,23 +60,13 @@ X <- t(expr_mat)
 keep_samples <- rowSums(is.finite(X)) > 0
 X <- X[keep_samples, , drop = FALSE]
 
-if (nrow(X) < 3) {
-  stop("Após filtragem, sobraram poucas amostras para PCA.")
-}
-
 col_means <- colMeans(X, na.rm = TRUE)
 na_idx <- which(!is.finite(X), arr.ind = TRUE)
-if (nrow(na_idx) > 0) {
-  X[na_idx] <- col_means[na_idx[, 2]]
-}
 
 col_var <- apply(X, 2, var)
 keep_cols <- is.finite(col_var) & col_var > 0
 X <- X[, keep_cols, drop = FALSE]
 
-if (ncol(X) < 2) {
-  stop("Após filtragem, sobraram poucas features (genes) para PCA.")
-}
 
 # =========================================================
 # 5) PCA
